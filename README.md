@@ -1,23 +1,23 @@
-# yai-cli
+# yiai-cli
 init project from cli tool
 
 ## Insall
 
 ``` bash
-npm install -g yai-cli
+npm install -g yiai-cli
 ```
 
 ## Init Project
 ### Init manage-system project
 
 ``` bash
-yai manage-system-template my-project
+yiai manage-system-template my-project
 ```
 
 ### Inint electron-app project
 
 ``` bash
-yai electron-vue-template my-project
+yiai electron-vue-template my-project
 ```
 
 ## License
