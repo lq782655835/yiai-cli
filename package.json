@@ -1,0 +1,31 @@
+{
+  "name": "yiai-cli",
+  "version": "1.0.0",
+  "description": "init project from cli tool",
+  "main": "index.js",
+  "bin": {
+    "yai": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lq782655835/yai-cli.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "springleo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lq782655835/yai-cli/issues"
+  },
+  "homepage": "https://github.com/lq782655835/yai-cli#readme",
+  "dependencies": {
+    "commander": "^2.18.0",
+    "git-clone": "^0.1.0",
+    "shelljs": "^0.8.2",
+    "tracer": "^0.9.1"
+  }
+}
