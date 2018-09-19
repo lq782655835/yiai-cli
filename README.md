@@ -8,16 +8,23 @@ npm install -g yiai-cli
 ```
 
 ## Init Project
-### Init manage-system project
+
+### Init official website project
 
 ``` bash
-yiai manage-system-template my-project
+yiai official-website my-project
 ```
 
-### Inint electron-app project
+### Inint electron app project
 
 ``` bash
-yiai electron-vue-template my-project
+yiai electron-vue my-project
+```
+
+### Init manage system project
+
+``` bash
+yiai manage-system my-project
 ```
 
 ## License
