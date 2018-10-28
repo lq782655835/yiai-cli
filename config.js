@@ -1,5 +1,4 @@
 module.exports = {
-    'electron-vue': 'electron-vue-template',
-    'manage-system': 'manage-system-template',
-    'official-website': 'official-website-template'
+    'vue': 'https://github.com/lq782655835/standard-vue-project.git',
+    'electron': 'https://github.com/lq782655835/electron-vue-template.git'
 }

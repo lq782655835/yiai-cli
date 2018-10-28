@@ -13,19 +13,22 @@ program
 program
     .command('* <tpl> <project>')
     .action(function(tpl, project) {
-        log.info('目前yiai-cli支持以下模板：')
-        log.info('yiai-cli official-website/electron-vue/manage-system my-project')
-        if (tpl && project) {
-            let pwd = shell.pwd()
-            log.info(`正在拉取模板代码，下载位置：${pwd}/${project}/ ...`)
+        log.info('blow is format commond for yiai-cli')
+        log.info('yiai-cli vue/electron my-project')
 
-            tpl = projectMap[tpl] || tpl
-            clone(`https://github.com/lq782655835/${tpl}.git`, pwd + `/${project}`, null, function() {
-                shell.rm('-rf', pwd + `/${project}/.git`)
-                log.info('模板工程建立完成')
-            })
-        } else {
-            log.error('example: yiai-cli electron-vue-template my-project')
+        tpl = projectMap[tpl] || tpl
+        if (!tpl || !project) {
+            log.error('please use format like: yiai-cli vue my-project')
+            return
         }
+
+        let pwd = shell.pwd()
+        log.info(`download template project code，full path：${pwd}/${project}/ ...`)
+
+        tpl = projectMap[tpl] || tpl
+        clone(tpl, pwd + `/${project}`, null, function() {
+            shell.rm('-rf', pwd + `/${project}/.git`)
+            log.info('project is finished')
+        })
     })
 program.parse(process.argv)

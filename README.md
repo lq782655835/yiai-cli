@@ -9,22 +9,22 @@ npm install -g yiai-cli
 
 ## Init Project
 
+### [Init vue project base on vue-cli 3.0](https://github.com/lq782655835/standard-vue-project)
+
+``` bash
+yiai vue my-project
+```
+
+### [Init electron app project](https://github.com/lq782655835/electron-vue-template.git)
+
+``` bash
+yiai electron my-project
+```
+
 ### Init official website project
 
 ``` bash
-yiai official-website my-project
-```
-
-### Inint electron app project
-
-``` bash
-yiai electron-vue my-project
-```
-
-### Init manage system project
-
-``` bash
-yiai manage-system my-project
+yiai website my-project
 ```
 
 ## License
