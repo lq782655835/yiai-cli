@@ -1,10 +1,11 @@
 # yiai-cli
-init project from cli tool
+
+Init project from cli-tool base on NETEASE AI TEAM STANDARD
 
 ## Insall
 
 ``` bash
-npm install -g yiai-cli
+npm install -g yiai-cli@latest
 ```
 
 ## Init Project
