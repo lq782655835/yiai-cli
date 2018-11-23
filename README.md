@@ -8,7 +8,7 @@ init project from uniform cli-tool. the code standard rule for [here](https://lq
 npm install -g yiai-cli@latest
 ```
 
-## Init Project
+## Usage
 
 ### [vue](https://github.com/lq782655835/standard-vue-project)<sup>`base on vue-cli3`</sup>
 
