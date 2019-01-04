@@ -1,6 +1,6 @@
 {
   "name": "yiai-cli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "init project from cli tool",
   "main": "index.js",
   "bin": {
