@@ -45,9 +45,10 @@ const askQuestions = () => {
 
 const create = ({project, tpl}) => {
     let pwd = shell.pwd()
-    clone(projectMap[tpl], pwd + `/${project}`, null, function() {
-        shell.rm('-rf', pwd + `/${project}/.git`)
-        console.log(chalk.green('project is finished'))
+    let dest = `${pwd}/${project}`
+    clone(projectMap[tpl], dest, null, function() {
+        shell.rm('-rf', dest + `/.git`)
+        console.log(chalk.white.bgGreen.bold(`Done！project created at ${dest}`))
     })
 }
 
