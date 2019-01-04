@@ -1,34 +1,58 @@
 #!/usr/bin/env node
 
 const clone = require('git-clone')
-const program = require('commander')
-const shell = require('shelljs');
-const log = require('tracer').colorConsole()
+const shell = require('shelljs')
+const inquirer = require("inquirer")
+const chalk = require("chalk")
+const figlet = require("figlet")
+
 const projectMap = require('./config')
 const version = require('./package.json').version
 
-program
-    .version(version)
-    .description('yiai-cli: netease ai cli')
-program
-    .command('* <tpl> <project>')
-    .action(function(tpl, project) {
-        log.info('blow is format commond for yiai-cli')
-        log.info('yiai-cli vue/electron my-project')
+const run = async () => {
+    print()
 
-        tpl = projectMap[tpl] || tpl
-        if (!tpl || !project) {
-            log.error('please use format like: yiai-cli vue my-project')
-            return
+    const answers = await askQuestions()
+    create(answers)
+}
+
+const print = () => console.log(
+        chalk.green(
+            figlet.textSync("YIAI-CLI", {
+                font: "Ghost",
+                horizontalLayout: "default",
+                verticalLayout: "default"
+            })
+        )
+    )
+
+const askQuestions = () => {
+    const questions = [
+        {
+            name: "project",
+            type: "input",
+            message: "your project name"
+        },
+        {
+            type: "list",
+            name: "tpl",
+            message: "choice your project template?",
+            choices: Object.keys(projectMap)
         }
+    ]
+    return inquirer.prompt(questions)
+}
 
-        let pwd = shell.pwd()
-        log.info(`download template project code，full path：${pwd}/${project}/ ...`)
-
-        tpl = projectMap[tpl] || tpl
-        clone(tpl, pwd + `/${project}`, null, function() {
-            shell.rm('-rf', pwd + `/${project}/.git`)
-            log.info('project is finished')
-        })
+const create = ({project, tpl}) => {
+    let pwd = shell.pwd()
+    clone(projectMap[tpl], pwd + `/${project}`, null, function() {
+        shell.rm('-rf', pwd + `/${project}/.git`)
+        console.log(chalk.green('project is finished'))
     })
-program.parse(process.argv)
+}
+
+try {
+    run()
+} catch (error) {
+    console.log(chalk.red(error))
+}
