@@ -13,6 +13,7 @@ npm install -g yiai-cli@latest
 ``` bash
 yiai
 ```
+![image](https://user-images.githubusercontent.com/6310131/50680697-9cbd0f80-1043-11e9-9f91-e98a7786779a.png)
 
 you can choice one of below templates:
 * [vue](https://github.com/lq782655835/standard-vue-project)<sup>`base on vue-cli3`</sup>
