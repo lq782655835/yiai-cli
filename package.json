@@ -4,9 +4,10 @@
   "description": "init project from cli tool",
   "main": "index.js",
   "bin": {
-    "yiai": "index.js"
+    "yiai": "./index.js"
   },
   "scripts": {
+    "github": "sh deploy.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
