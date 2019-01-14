@@ -16,6 +16,7 @@ yiai
 ![image](https://user-images.githubusercontent.com/6310131/50680697-9cbd0f80-1043-11e9-9f91-e98a7786779a.png)
 
 you can choice one of below templates:
+* [vue-typescirpt](https://github.com/lq782655835/standard-vue-typescript-project)<sup>`new`</sup>
 * [vue](https://github.com/lq782655835/standard-vue-project)<sup>`base on vue-cli3`</sup>
 * [electron](https://github.com/lq782655835/electron-vue-template.git)<sup>`base on electron-vue`</sup>
 * [official website](https://github.com/lq782655835/official-website-project)<sup>`base on nuxt`</sup>
