@@ -19,9 +19,9 @@ you can choice one of below templates:
 * [vue-typescirpt](https://github.com/lq782655835/standard-vue-typescript-project)<sup>`new`</sup>
 * [vue](https://github.com/lq782655835/standard-vue-project)<sup>`base on vue-cli3`</sup>
 * [electron](https://github.com/lq782655835/electron-vue-template.git)<sup>`base on electron-vue`</sup>
-* [official website](https://github.com/lq782655835/official-website-project)<sup>`base on nuxt`</sup>
+* [official-website](https://github.com/lq782655835/official-website-project)<sup>`base on nuxt`</sup>
 * [mini-app](https://github.com/lq782655835/mpvue-project)<sup>`base on mpvue`</sup>
-
+* [node-tool](https://github.com/lq782655835/json2ts)
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) License
+The code is distributed under the [MIT](http://opensource.org/licenses/MIT) license
