@@ -1,11 +1,11 @@
 # yiai-cli
 
-init project from uniform cli-tool. the code standard rule for [here](https://lq782655835.github.io/blogs/dist/team-standard/0.standard-ai-summary.html)
+init project from uniform cli-tool. the code standard rule for [here](https://lq782655835.github.io/blogs/team-standard/0.standard-ai-summary.html)
 
 ## Insall
 
 ``` bash
-npm install -g yiai-cli@latest
+npm install -g yiai-cli
 ```
 
 ## Usage
