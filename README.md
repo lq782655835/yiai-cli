@@ -24,4 +24,4 @@ you can choice one of below templates:
 * [node-tool](https://github.com/lq782655835/json2ts)
 ## License
 
-The code is distributed under the [MIT](http://opensource.org/licenses/MIT) license
+The code is distributed under the ![MIT](https://badgen.net/badge/license/MIT/blue) license
