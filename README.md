@@ -1,6 +1,16 @@
 # yiai-cli
 
-init project from uniform cli-tool. the code standard rule for [here](https://lq782655835.github.io/blogs/team-standard/0.standard-ai-summary.html)
+init project from uniform cli-tool base on [AI TEAM STANDARD](https://lq782655835.github.io/blogs/team-standard/0.standard-ai-summary.html)
+
+[![NPM Version][npm-img]][npm-url]
+[![NPM Download][download-img]][download-url]
+
+[npm-img]: http://img.shields.io/npm/v/yiai-cli.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/yiai-cli
+[david-img]: https://img.shields.io/github/repo-size/lq782655835/yiai-cli.svg
+[david-url]: https://npmjs.org/package/yiai-cli
+[download-img]: https://img.shields.io/npm/dm/yiai-cli.svg?style=flat-square
+[download-url]: https://npmjs.org/package/yiai-cli
 
 ## Insall
 
@@ -13,7 +23,8 @@ npm install -g yiai-cli
 ``` bash
 yiai
 ```
-![image](https://user-images.githubusercontent.com/6310131/50680697-9cbd0f80-1043-11e9-9f91-e98a7786779a.png)
+
+![image](https://user-images.githubusercontent.com/6310131/56708337-ddee4200-674e-11e9-81cc-f051d064ddbd.png)
 
 you can choice one of below templates:
 * [vue-typescirpt](https://github.com/lq782655835/standard-vue-typescript-project)<sup>`new`</sup>
@@ -24,4 +35,4 @@ you can choice one of below templates:
 * [node-tool](https://github.com/lq782655835/json2ts)
 ## License
 
-The code is distributed under the ![MIT](https://badgen.net/badge/license/MIT/blue) license
+The code is distributed under the ![MIT](https://badgen.net/badge/license/MIT/blue)
