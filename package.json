@@ -8,6 +8,7 @@
   },
   "scripts": {
     "github": "sh deploy.sh",
+    "dev": "./index.js",
     "test": "mocha --timeout 60000 test/**/*.spec.js"
   },
   "repository": {

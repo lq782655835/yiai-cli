@@ -30,8 +30,10 @@ const print = () => {
 
 const askQuestions = () => {
     const maxCharLength = Math.max(...Object.keys(config).map(key => key.length))
-    const strPadEndLength = maxCharLength + 10
-    const choices = Object.keys(config).map(key => `${key.padEnd(strPadEndLength)} ${config[key].description}`)
+    const strPadEndLength = maxCharLength + 5
+    const choices = Object.keys(config).map(key => {
+        return `${chalk.yellow('★')}  ${chalk.blue(key.padEnd(strPadEndLength))} - ${config[key].description}`
+    })
 
     const questions = [
         {
