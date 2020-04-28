@@ -1,14 +1,13 @@
 {
   "name": "yiai-cli",
   "version": "1.0.8",
-  "description": "init project from cli tool",
-  "main": "index.js",
+  "description": "CLI for Prjects",
   "bin": {
-    "yiai": "./index.js"
+    "yiai": "bin/yiai"
   },
   "scripts": {
     "github": "sh deploy.sh",
-    "dev": "./index.js",
+    "dev": "./bin/yiai",
     "test": "mocha --timeout 60000 test/**/*.spec.js"
   },
   "repository": {
@@ -24,16 +23,23 @@
     "url": "https://github.com/lq782655835/yiai-cli/issues"
   },
   "homepage": "https://github.com/lq782655835/yiai-cli#readme",
+  "engines": {
+    "node": ">=8"
+  },
   "dependencies": {
     "chalk": "^2.4.1",
+    "commander": "^5.1.0",
     "figlet": "^1.2.1",
     "git-clone": "^0.1.0",
     "inquirer": "^6.2.1",
     "ora": "^4.0.3",
+    "semver": "^7.3.2",
     "shelljs": "^0.8.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.1.1"
+    "didyoumean": "^1.2.1",
+    "mocha": "^7.1.1",
+    "update-notifier": "^4.1.0"
   }
 }
