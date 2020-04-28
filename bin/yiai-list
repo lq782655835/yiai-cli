@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const config = require('../lib/config')
+const chalk = require("chalk")
+
+program.parse(process.argv);
+
+function showDescription(config) {
+    const maxCharLength = Math.max(...Object.keys(config).map(key => key.length))
+    const strPadEndLength = maxCharLength + 5
+
+    for (let [key, value] of Object.entries(config)) {
+        let desc = `${chalk.yellow('★')}  ${chalk.blue(key.padEnd(strPadEndLength))} - ${config[key].description}`
+        console.log(desc)
+    }
+}
+
+showDescription(config)
+
