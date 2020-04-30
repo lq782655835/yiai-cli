@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.2](https://github.com/lq782655835/yiai-cli/compare/v1.1.1...v1.1.2) (2020-04-30)
+
+
+### Features
+
+* add serve ([831c78f](https://github.com/lq782655835/yiai-cli/commit/831c78f311031b55235ac95d392acb2d91db0f79))
+
 ### [1.1.1](https://github.com/lq782655835/yiai-cli/compare/v1.1.0...v1.1.1) (2020-04-28)
 
 
