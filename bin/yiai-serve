@@ -1,0 +1,244 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var resolve = require('path').resolve
+  , join = require('path').join
+  , exec = require('child_process').exec
+  , program = require('commander')
+  , connect = require('connect')
+  , morgan = require('morgan')
+  , compression = require('compression')
+  , serveFavicon = require('serve-favicon')
+  , serveStatic = require('serve-static')
+  , serveIndex = require('serve-index')
+  , basicAuth = require('basic-auth-connect')
+  , open = require('opn')
+  , stylus = require('stylus')
+  , pug = require('pug')
+  , less = require('less-middleware')
+  , url = require('url')
+  , fs = require('fs')
+  , http2 = require('http2');
+
+// CLI
+
+program
+  .usage('[options] [dir]')
+  .option('-o, --open', 'automatically opens a browser window to this server')
+  .option('-a, --auth <user>:<pass>', 'specify basic auth credentials')
+  .option('-F, --format <fmt>', 'specify the log format string', 'dev')
+  .option('-p, --port <port>', 'specify the port [3000]', Number, 3000)
+  .option('-r, --root <root>', 'specify the root directory []', String, "")
+  .option('    --https-port <port>', 'specify the port [3443]', Number, 3443)
+  .option('-H, --hidden', 'enable hidden file serving')
+  .option('-S, --no-stylus', 'disable stylus rendering')
+  .option('-J, --no-pug', 'disable pug rendering')
+  .option('    --no-less', 'disable less css rendering')
+  .option('-I, --no-icons', 'disable icons')
+  .option('-L, --no-logs', 'disable request logging')
+  .option('-D, --no-dirs', 'disable directory serving')
+  .option('-C, --cors', 'allows cross origin access serving')
+  .option('-s, --https', 'also serve over https')
+  .option('    --key', 'key file path for https')
+  .option('    --cert', 'certificate file for https')
+  .option('    --ca', 'CA certificate file for https')
+  .option('    --compress', 'gzip or deflate the response')
+  .option('    --exec <cmd>', 'execute command on each request')
+  .parse(process.argv);
+
+// path
+var path = resolve(program.args.shift() || '.');
+path = path + "/" + program.root;
+
+console.log(program.args, 1)
+console.log(program.root, 1)
+
+// setup the server
+var server = connect();
+
+// basic auth
+
+if (program.auth) {
+  var user = program.auth.split(':')[0];
+  var pass = program.auth.split(':')[1];
+  if (!user || !pass) throw new Error('user and pass required');
+  server.use(basicAuth(user, pass));
+}
+
+// logger
+if (program.logs) server.use(morgan(program.format));
+
+// pug
+if (program.pug) {
+  server.use(function(req, res, next){
+    if (!req.url.match(/\.(jade|pug)$/)) return next();
+    var file = join(path, url.parse(req.url).pathname);
+    fs.readFile(file, 'utf8', function(err, str){
+      if (err) return next(err);
+      try {
+        var fn = pug.compile(str, { filename: file });
+        str = fn();
+        res.setHeader('Content-Type', 'text/html');
+        res.setHeader('Content-Length', Buffer.byteLength(str));
+        res.end(str);
+      } catch (err) {
+        next(err);
+      }
+    });
+  });
+}
+
+// convert .styl to .css to trick stylus.middleware
+if (program.stylus) {
+  server.use(function(req, res, next){
+    req.url = req.url.replace(/\.styl$/, '.css');
+    next();
+  });
+}
+
+// stylus
+server.use(stylus.middleware({ src: path }));
+
+// less
+if (program.less) {
+  server.use(less(path));
+}
+
+// CORS access for files
+if (program.cors) {
+  server.use(function(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Accept, x-csrf-token, origin');
+    if ('OPTIONS' == req.method) return res.end();
+    next();
+  });
+}
+
+// compression
+if (program.compress) {
+  server.use(compression());
+}
+
+// exec command
+if (program.exec) {
+  server.use(function (req, res, next){
+    exec(program.exec, next);
+  });
+}
+
+// static files
+server.use(serveStatic(path, { hidden: program.hidden }));
+
+// directory serving
+if (program.dirs) {
+    server.use(serveIndex(path, {
+      hidden: program.hidden
+    , icons: program.icons
+  }));
+}
+
+// if requested, setup https server as well
+if (program.https) {
+
+  var httpsOptions = {
+    keytype: 'rsa:2048',
+    days: 365,
+    keyFile: null,
+    certFile: null,
+    caFile: null
+  };
+
+  // once https is ready to start...
+  var httpsReady = function () {
+    var options = {
+      key: fs.readFileSync(httpsOptions.keyFile),
+      cert: fs.readFileSync(httpsOptions.certFile),
+      requestCert: true,
+      rejectUnauthorized: false
+    };
+    if (httpsOptions.caFile) {
+      options.ca = fs.readFileSync(httpsOptions.caFile);
+    }
+
+    var httpsServer = http2.createServer(options, server)
+
+    // start the http server
+    httpsServer.listen(program.httpsPort, function () {
+      console.log('\033[90mserving \033[36m%s\033[90m on port \033[96m%d\033[0m', path, program.httpsPort);
+    });
+  };
+
+  // if passed, skip generation
+  if (program.key && program.cert) {
+    httpsOptions.keyFile = program.key;
+    httpsOptions.certFile = program.cert;
+    httpsOptions.caFile = program.ca;
+    httpsReady();
+  }
+  else {
+    httpsOptions.keyFile = '.serve.key';
+    httpsOptions.certFile = '.serve.crt';
+
+    var params = {
+      C: 'US',
+      ST: 'Test State',
+      L: 'Test Locality',
+      O: 'Org Name',
+      OU: 'Org Unit Name',
+      CN: 'localhost',
+      emailAddress: 'test'
+    };
+    var subj = '';
+    for (key in params) {
+      if (!params.hasOwnProperty(key)) continue;
+      subj += '/' + key + '=' + params[key];
+    }
+
+    // call openssl to generate keys
+    var cmd = 'openssl req ' +
+      ' -new -newkey ' + httpsOptions.keytype +
+      ' -days ' + httpsOptions.days +
+      ' -x509 ' +
+      ' -nodes ' +
+      ' -subj "' + subj + '"' +
+      ' -keyout ' + httpsOptions.keyFile +
+      ' -out ' + httpsOptions.certFile;
+
+    exec(cmd, function (err, stderr, stdout) {
+      if (err) throw err;
+      if (stderr) throw new Error(stderr);
+      httpsReady();
+    });
+
+  }
+
+}
+
+function onError (err) {
+  switch (err.code) {
+    case 'EADDRINUSE':
+      console.error('\033[33mWARN:\033[90m Port \033[33m%d\033[90m is already in use.', err.port);
+      launch(err.port + 1);
+      break;
+    default:
+      throw err;
+  }
+}
+
+function launch (port) {
+  return server.listen(port, function () {
+    // Successful message
+    console.log('\033[90mServing \033[36m%s\033[90m on port \033[96m%d\033[0m', path, port);
+    console.log('\nAvailable on: \033[36mhttp://127.0.0.1:' + port + '\033[90m');
+
+    // open the browser window to this server
+    program.open && open('http://127.0.0.1:' + port);
+  }).on('error', onError);
+}
+
+// start the server
+launch(program.port)

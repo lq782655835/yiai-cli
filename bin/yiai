@@ -25,8 +25,9 @@ program
     .usage('<command> [options]')
     .version(pkg.version)
     // Project commands
-    .command('init <name>', `Initialize a kind of template`)
-    .command('list', `Add a kind of material: ${chalk.yellow('block')}`)
+    .command('init [name]', `Initialize a kind of template`)
+    .command('list', `List templates`)
+    .command('serve [dir]', `server built by local static folder`)
     .command('publish <version>', 'Publish a new version')
     .command('screenshot <url|local-file>', 'Take a screenshot of a web page')
     .command('ghpages', 'Push a directory to gh-pages')
