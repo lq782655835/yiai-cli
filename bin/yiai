@@ -28,6 +28,7 @@ program
     .command('init [name]', `Initialize a kind of template`)
     .command('list', `List templates`)
     .command('serve [dir]', `server built by local static folder`)
+    .command('gitsync', `sync vue project dist folder to egg project public`)
     .command('publish <version>', 'Publish a new version')
     .command('screenshot <url|local-file>', 'Take a screenshot of a web page')
     .command('ghpages', 'Push a directory to gh-pages')
