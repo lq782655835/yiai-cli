@@ -1,0 +1,2 @@
+// more see: https://github.com/lq782655835/git-sync-tool
+require('git-sync-tool')
