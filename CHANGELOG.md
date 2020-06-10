@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/lq782655835/yiai-cli/compare/v1.1.2...v1.1.3) (2020-04-30)
+
+
+### Bug Fixes
+
+* package.json move devDependencies to dependencies ([3c8581e](https://github.com/lq782655835/yiai-cli/commit/3c8581ec0bd8c5e21548d574b15e2ff766ea9a51))
+
 ### [1.1.2](https://github.com/lq782655835/yiai-cli/compare/v1.1.1...v1.1.2) (2020-04-30)
 
 
