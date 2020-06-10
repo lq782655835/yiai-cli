@@ -96,6 +96,12 @@ Options:
   -h, --help                display help for command
 ```
 
+## 4. yiai gitsync
+
+支持配置`git-sync.target`,支持`branch、dist`参数设置。更多该工具详情，可看独立npm版本: [git-sync-tool](https://github.com/lq782655835/git-sync-tool)
+
+> 在vue项目的package.json中配置`git-sync.target`，指向egg项目（最终node项目部署）
+
 ## License
 
 The code is distributed under the ![MIT](https://badgen.net/badge/license/MIT/blue)
