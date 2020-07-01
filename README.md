@@ -102,6 +102,32 @@ Options:
 
 > 在vue项目的package.json中配置`git-sync.target`，指向egg项目（最终node项目部署）
 
+## 问题列表
+
+1. `yiai gitsync`和`gh-pages`同步工具有何区别?
+
+两者核心功能一致，都可以把指定dist静态文件，同步到另外一个项目的dest目录下，不过yiai gitsync可以有较多的自定义能力，更符合项目扩展。
+
+附上[ghpages](https://github.com/tschaub/gh-pages#publish)同步文件代码：
+
+``` js
+const ghpages = require('gh-pages')
+
+// ghpages api方式，同步静态文件
+ghpages.publish('dist'), {
+  dest: 'app/public',
+  repo: 'xxx/webserver-egg.git',
+  branch: 'develop'
+}, (e) => {
+  if (e) {
+    console.log('sync failed', e.message)
+    return process.exit(1)
+  }
+})
+```
+
+> gh-pages publish[核心源码](https://github.com/tschaub/gh-pages/blob/main/lib/index.js#L48)流程：1. gitclone/git pull/git checkout拿到最新代码到cache文件夹中  2. 清空dest文件夹，并同步dist内容到dest文件夹中  3. git tag/git push推送。
+
 ## License
 
 The code is distributed under the ![MIT](https://badgen.net/badge/license/MIT/blue)
